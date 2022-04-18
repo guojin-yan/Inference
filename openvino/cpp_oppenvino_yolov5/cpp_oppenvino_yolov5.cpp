@@ -110,7 +110,7 @@ int main() {
     cv::Mat result_image = result.yolov5_result(image, result_array);
 
     // 查看输出结果
-    cv::imshow("C++ + OpenVINO + Yolov5 推理结果", result_image);
+    cv::imshow("C++ + TensorRT + Yolov5 推理结果", result_image);
     cv::waitKey();
 
 }

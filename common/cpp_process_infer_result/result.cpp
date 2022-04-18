@@ -10,7 +10,6 @@ void ResultYolov5::read_class_names(std::string path_name)
 	std::string str;
 	while (getline(infile, str)) {
 		class_names.push_back(str);
-		std::cout << str << std::endl;
 		str.clear();
 
 	}

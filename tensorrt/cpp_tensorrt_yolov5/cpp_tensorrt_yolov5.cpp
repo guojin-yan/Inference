@@ -148,12 +148,12 @@ int main() {
 	image.copyTo(max_image(roi));
 	// 将图像归一化，并放缩到指定大小
 	cv::Size input_node_shape(input_node_dim.d[2], input_node_dim.d[3]);
-	cv::Mat normal_image = cv::dnn::blobFromImage(max_image, 1 / 255.0, input_node_shape, cv::Scalar(0, 0, 0), true, false);
+	cv::Mat BN_image = cv::dnn::blobFromImage(max_image, 1 / 255.0, input_node_shape, cv::Scalar(0, 0, 0), true, false);
 
 	// 创建输入cuda流
 	cudaStreamCreate(&p->stream);
 	std::vector<float> input_data(input_data_length);
-	memcpy(input_data.data(), normal_image.ptr<float>(), input_data_length * sizeof(float));
+	memcpy(input_data.data(), BN_image.ptr<float>(), input_data_length * sizeof(float));
 
 	// 输入数据由内存到GPU显存
 	cudaMemcpyAsync(p->blob_data_buffer[input_node_index], input_data.data(), input_data_length * sizeof(float), cudaMemcpyHostToDevice, p->stream);
