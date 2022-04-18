@@ -52,7 +52,8 @@ int openvino_yolov5(std::string model_path, std::string image_path, std::string 
 
 int main() {
 
-
+    // 模型输入进本信息
+    // 将模型文件放在英文目录下
     std::string model_path = "E:/Text_Model/yolov5/yolov5s.onnx";
     std::string image_path = "E:/Text_dataset/YOLOv5/0001.jpg";
     std::string lable_path = "E:/Git_space/Al模型部署开发方式/model/yolov5/lable.txt";

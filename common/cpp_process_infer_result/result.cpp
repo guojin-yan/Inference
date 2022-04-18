@@ -1,27 +1,24 @@
 #include "result.h"
 
-std::vector<std::string> txt_to_vector(std::string path_name)
+
+void ResultYolov5::read_class_names(std::string path_name)
 {
-	std::vector<std::string> result;
 	std::ifstream infile;
 	infile.open(path_name.data());   //将文件流对象与文件连接起来 
 	assert(infile.is_open());   //若失败,则输出错误消息,并终止程序运行 
 
 	std::string str;
 	while (getline(infile, str)) {
-		result.push_back(str);
+		class_names.push_back(str);
 		std::cout << str << std::endl;
 		str.clear();
 
 	}
 	infile.close();             //关闭文件输入流 
-	return result;
+
 }
 
-
-
-
-cv::Mat yolov5_result(cv::Mat image, float* result, std::vector<std::string> class_names, float factor) {
+cv::Mat ResultYolov5::yolov5_result(cv::Mat image, float* result) {
 	cv::Mat det_output = cv::Mat(25200, 85, CV_32F, result);
 	//// post-process
 	std::vector<cv::Rect> position_boxes;
