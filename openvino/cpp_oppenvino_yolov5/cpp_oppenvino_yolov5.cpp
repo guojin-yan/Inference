@@ -1,6 +1,4 @@
 ﻿
-
-
 #include <iterator>
 #include <memory>
 #include <sstream>
@@ -48,12 +46,27 @@ typedef struct openvino_core {
 int openvino_yolov5(std::string model_path, std::string image_path, std::string input_node_name, 
     std::string output_node_name, std::vector<std::string> class_names) {
     
+    
+}
+
+
+int main() {
+
+
+    std::string model_path = "E:/Text_Model/yolov5/yolov5s.onnx";
+    std::string image_path = "E:/Text_dataset/YOLOv5/0001.jpg";
+    std::string lable_path = "E:/Git_space/Al模型部署开发方式/model/yolov5/lable.txt";
+    std::string input_node_name = "images";
+    std::string output_node_name = "output";
+
+
+
     // 初始化推理核心结构体
     CoreStruct* p = new CoreStruct();
     p->model_ptr = p->core.read_model(model_path);
     p->compiled_model = p->core.compile_model(p->model_ptr, "CPU");
     p->infer_request = p->compiled_model.create_infer_request();
-    
+
     // 对输入图片进行预处理
     // 获取输入节点tensor
     ov::Tensor input_image_tensor = p->infer_request.get_tensor(input_node_name);
@@ -83,39 +96,22 @@ int openvino_yolov5(std::string model_path, std::string image_path, std::string 
 
     // 模型推理
     p->infer_request.infer();
-    
+
     // 获取输出节点tensor
     const ov::Tensor& output_tensor = p->infer_request.get_tensor(output_node_name);
     // 读取输出数据
-    float* results = output_tensor.data<float>();
-
+    float* result_array = output_tensor.data<float>();
     // 处理输出结果
-    float factor = max_side_length / (float) input_H;
-    cv::Mat result_image =  yolov5_result(image, results, class_names, factor);
-     
+    ResultYolov5 result;
+    result.read_class_names(lable_path);
+ 
+    result.factor = max_side_length / (float)input_H;
+    cv::Mat result_image = result.yolov5_result(image, result_array);
+
     // 查看输出结果
-    cv::imshow("C# + OpenVINO + Yolov5 推理结果", result_image);
+    cv::imshow("C++ + OpenVINO + Yolov5 推理结果", result_image);
     cv::waitKey();
 
-}
-
-
-int main() {
-
-
-    std::string model_path = "E:/Text_Model/yolov5/yolov5s.onnx";
-    std::string image_path = "E:/Text_dataset/YOLOv5/0001.jpg";
-    std::string input_node_name = "images";
-    std::string output_node_name = "output";
-
-    std::string lable_path = "E:/Git_space/Al模型部署开发方式/model/yolov5/lable.txt";
-
-    // 读取识别结果lable
-    std::vector<std::string> class_names;
-    class_names = txt_to_vector(lable_path);
-
-    // 模型推理
-    openvino_yolov5(model_path, image_path, input_node_name, output_node_name, class_names);
 }
 
 
