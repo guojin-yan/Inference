@@ -94,7 +94,7 @@ int openvino_yolov5(std::string model_path, std::string image_path, std::string 
     cv::Mat result_image =  yolov5_result(image, results, class_names, factor);
      
     // 查看输出结果
-    cv::imshow("openvino - yolov5 - result", result_image);        
+    cv::imshow("C# + OpenVINO + Yolov5 推理结果", result_image);
     cv::waitKey();
 
 }

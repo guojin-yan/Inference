@@ -142,11 +142,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\common\cpp_process_infer_result\result.cpp" />
     <ClCompile Include="cpp_oppenvino_yolov5.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\common\cpp_process_infer_result\result.h" />
+    <ProjectReference Include="..\..\common\cpp_process_infer_result\cpp_process_infer_result.vcxproj">
+      <Project>{00a4b642-b47e-41c4-96d0-e0b6d3d35437}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
