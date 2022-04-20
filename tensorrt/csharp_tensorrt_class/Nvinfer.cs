@@ -61,10 +61,10 @@ namespace TensorRtSharp
         /// <param name="node_name_wchar">模型节点名</param>
         /// <param name="data_length">输出数据长度</param>
         /// <returns>输出数据数组</returns>
-        public float[] read_infer_result(string node_name_wchar,int data_length)
+        public float[] read_infer_result(string node_name_wchar,ulong data_length)
         {
             float[] result = new float[data_length];
-            NativeMethods.read_infer_result(ptr, node_name_wchar, ref result[0]);
+            NativeMethods.read_infer_result(ptr, node_name_wchar, ref result[0], data_length);
             return result;
         }
         /// <summary>

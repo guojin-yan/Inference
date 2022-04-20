@@ -102,8 +102,11 @@ namespace CommomClass
                 Cv2.Rectangle(result_image, new Point(position_boxes[index].TopLeft.X, position_boxes[index].TopLeft.Y - 20),
                     new Point(position_boxes[index].BottomRight.X, position_boxes[index].TopLeft.Y), new Scalar(0, 255, 255), -1);
                 Cv2.PutText(result_image, class_names[idx], new Point(position_boxes[index].X, position_boxes[index].Y - 10),
-                    HersheyFonts.HersheySimplex, 0.5, new Scalar(0, 0, 0));
+                    HersheyFonts.HersheySimplex, 0.6, new Scalar(0, 0, 0), 1);
             }
+
+            //Cv2.ImShow("C# + TensorRT + Yolov5 推理结果", result_image);
+            //Cv2.WaitKey();
 
             return result_image;
 

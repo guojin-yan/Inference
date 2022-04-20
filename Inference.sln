@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cpp", "cpp", "{0E6F2CB5-B60
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "csharp", "csharp", "{EBD245C5-F5C5-4E92-9E0F-204BC1D42517}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "all_demo_csharp", "all_demo_csharp", "{3EAFE96D-ED8A-4BA0-8A2C-97E513E8411D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "model_inference_display_platform", "model_inference_display_platform", "{3EAFE96D-ED8A-4BA0-8A2C-97E513E8411D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{BACBE2E0-BA64-43D7-A6C7-28207F42C62A}"
 EndProject
@@ -57,11 +57,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csharp_openvino_yolov5", "o
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp_opencv_dnn_yolov5", "opencv_dnn\cpp_opencv_dnn_yolov5\cpp_opencv_dnn_yolov5.vcxproj", "{703922FC-D349-4425-B780-255C0B926A4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp_opencv_dnn_yolov5", "opencv_dnn\csharp_opencv_dnn_yolov5\csharp_opencv_dnn_yolov5.csproj", "{DA4CB48B-7239-4324-BDFE-B9155E46F0EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csharp_opencv_dnn_yolov5", "opencv_dnn\csharp_opencv_dnn_yolov5\csharp_opencv_dnn_yolov5.csproj", "{DA4CB48B-7239-4324-BDFE-B9155E46F0EA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp_onnx_runtime_yolov5", "onnx_runtime\cpp_onnx_runtime_yolov5\cpp_onnx_runtime_yolov5.vcxproj", "{D431D577-0A7E-40D4-9F77-2F716A6EBA2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp_onnx_runtime_yolov5", "onnx_runtime\csharp_onnx_runtime_yolov5\csharp_onnx_runtime_yolov5.csproj", "{70039BDF-6647-4D5C-98C6-F5E9748078EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csharp_onnx_runtime_yolov5", "onnx_runtime\csharp_onnx_runtime_yolov5\csharp_onnx_runtime_yolov5.csproj", "{70039BDF-6647-4D5C-98C6-F5E9748078EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "inference_platform", "inference_platform\inference_platform.csproj", "{88C2003C-B05E-4854-A874-8F919B295A02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -241,6 +243,18 @@ Global
 		{70039BDF-6647-4D5C-98C6-F5E9748078EB}.Release|x64.Build.0 = Release|Any CPU
 		{70039BDF-6647-4D5C-98C6-F5E9748078EB}.Release|x86.ActiveCfg = Release|Any CPU
 		{70039BDF-6647-4D5C-98C6-F5E9748078EB}.Release|x86.Build.0 = Release|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Debug|x64.Build.0 = Debug|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Debug|x86.Build.0 = Debug|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Release|x64.ActiveCfg = Release|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Release|x64.Build.0 = Release|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Release|x86.ActiveCfg = Release|Any CPU
+		{88C2003C-B05E-4854-A874-8F919B295A02}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -270,6 +284,7 @@ Global
 		{DA4CB48B-7239-4324-BDFE-B9155E46F0EA} = {C9AB61FE-26E2-4C5C-8A2E-D57C9FCE3272}
 		{D431D577-0A7E-40D4-9F77-2F716A6EBA2C} = {0E6F2CB5-B606-432F-9644-ED829B93BFC1}
 		{70039BDF-6647-4D5C-98C6-F5E9748078EB} = {EBD245C5-F5C5-4E92-9E0F-204BC1D42517}
+		{88C2003C-B05E-4854-A874-8F919B295A02} = {3EAFE96D-ED8A-4BA0-8A2C-97E513E8411D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E0969C4-D2FD-42BB-8498-D9AB33F122F5}

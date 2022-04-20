@@ -22,7 +22,7 @@ namespace TensorRtSharp
         [DllImport(tensorrt_dll_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public extern static IntPtr infer(IntPtr nvinfer_ptr);
         [DllImport(tensorrt_dll_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        public extern static void read_infer_result(IntPtr nvinfer_ptr, string node_name_wchar, ref float result);
+        public extern static void read_infer_result(IntPtr nvinfer_ptr, string node_name_wchar, ref float result, ulong data_length);
         [DllImport(tensorrt_dll_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public extern static void nvinfer_delete(IntPtr nvinfer_ptr);
     }

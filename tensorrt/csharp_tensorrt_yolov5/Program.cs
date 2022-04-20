@@ -38,7 +38,7 @@ namespace charp_tensorrt_yolov5
             image_size = Convert.ToUInt64(image_data.Length);
 
             // 加载推理图片数据
-            nvinfer.load_image_data(input_node_name, image_data, image_size,1);
+            nvinfer.load_image_data(input_node_name, image_data, image_size, 1);
             // 模型推理
             nvinfer.infer();
             // 读取推理结果
@@ -51,10 +51,11 @@ namespace charp_tensorrt_yolov5
             // 获取本地分类信息lable
             result.read_class_names(lable_path);
             // 处理结果数据
-            Mat result_image = result.process_resule(image,result_array);
+            Mat result_image = result.process_resule(image, result_array);
 
             Cv2.ImShow("C# + TensorRT + Yolov5 推理结果", result_image);
             Cv2.WaitKey();
+
         }
     }
 }

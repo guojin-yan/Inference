@@ -47,7 +47,7 @@ namespace charp_openvino_yolov5
             // 处理输出数据
             Mat result_image = result.process_resule(image,result_array);
 
-            Cv2.ImShow("C# + TensorRT + Yolov5 推理结果", result_image);
+            Cv2.ImShow("C# + OpenVINO + Yolov5 推理结果", result_image);
             Cv2.WaitKey();
 
         }

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.11.0" />
+    <PackageReference Include="OpenCvSharp4" Version="4.5.5.20211231" />
+    <PackageReference Include="OpenCvSharp4.Extensions" Version="4.5.5.20211231" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.5.5.20211231" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\common\csharp_process_infer_result\csharp_process_infer_result.csproj" />
+    <ProjectReference Include="..\openvino\csharp_openvino_class\csharp_openvino_class.csproj" />
+    <ProjectReference Include="..\tensorrt\csharp_tensorrt_class\csharp_tensorrt_class.csproj" />
+  </ItemGroup>
+
+</Project>

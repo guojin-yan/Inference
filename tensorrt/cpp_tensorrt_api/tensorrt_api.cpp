@@ -277,20 +277,13 @@ extern "C"  __declspec(dllexport) void* __stdcall infer(void* nvinfer_ptr) {
 // @para node_name_wchar 网络节点名称
 // @param output_result 输出数据指针
 extern "C"  __declspec(dllexport) void __stdcall read_infer_result(void* nvinfer_ptr,
-	const wchar_t* node_name_wchar, float* output_result) {
+	const wchar_t* node_name_wchar, float* output_result, size_t node_data_length) {
 	// 重构NvinferStruct
 	NvinferStruct* p = (NvinferStruct*)nvinfer_ptr;
 	
 	// 获取输出节点信息
 	const char* node_name = wchar_to_char(node_name_wchar);
 	int node_index = p->engine->getBindingIndex(node_name);
-	// 获取输出节点维度信息
-	nvinfer1::Dims node_dim = p->engine->getBindingDimensions(node_index);
-	int node_shape_w = node_dim.d[1];
-	int node_shape_h = node_dim.d[2];
-	// 输出数据长度
-	size_t node_data_length = node_shape_w * node_shape_h;
-
 	// 读取输出数据
 	// 创建输出数据
 	std::vector<float> output_data(node_data_length * 3);
