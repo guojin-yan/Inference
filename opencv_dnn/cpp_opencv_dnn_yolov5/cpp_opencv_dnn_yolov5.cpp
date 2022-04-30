@@ -2,8 +2,6 @@
 #include <fstream>
 
 #include <opencv2/opencv.hpp>
-#include <opencv2/dnn.hpp>
-#include <opencv2/dnn/all_layers.hpp>
 
 #include "common/cpp_process_infer_result/result.h"
 
