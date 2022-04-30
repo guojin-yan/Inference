@@ -35,7 +35,7 @@ namespace inference_platform
             image_data = max_image.ImEncode(".bmp");
             image_size = Convert.ToUInt64(image_data.Length);
             // 将图片数据加载到模型
-            core.load_input_data(input_node_name, image_data, image_size, 1);
+            core.load_input_data(input_node_name, image_data, image_size, 0);
             // 模型推理
             core.infer();
 

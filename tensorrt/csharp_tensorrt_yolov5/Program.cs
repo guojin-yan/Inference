@@ -38,7 +38,7 @@ namespace charp_tensorrt_yolov5
             image_size = Convert.ToUInt64(image_data.Length);
 
             // 加载推理图片数据
-            nvinfer.load_image_data(input_node_name, image_data, image_size, 1);
+            nvinfer.load_image_data(input_node_name, image_data, image_size, BNFlag.Normal);
             // 模型推理
             nvinfer.infer();
             // 读取推理结果

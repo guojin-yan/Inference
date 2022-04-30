@@ -33,21 +33,6 @@ void fill_tensor_data_image(ov::Tensor& input_tensor, const cv::Mat& input_image
     }
 }
 
-// @brief 推理核心结构体
-typedef struct openvino_core {
-    ov::Core core; // core对象
-    std::shared_ptr<ov::Model> model_ptr; // 读取模型指针
-    ov::CompiledModel compiled_model; // 模型加载到设备对象
-    ov::InferRequest infer_request; // 推理请求对象
-} CoreStruct;
-
-
-
-int openvino_yolov5(std::string model_path, std::string image_path, std::string input_node_name, 
-    std::string output_node_name, std::vector<std::string> class_names) {
-    
-    
-}
 
 
 int main() {
@@ -61,16 +46,15 @@ int main() {
     std::string output_node_name = "output";
 
 
-
-    // 初始化推理核心结构体
-    CoreStruct* p = new CoreStruct();
-    p->model_ptr = p->core.read_model(model_path);
-    p->compiled_model = p->core.compile_model(p->model_ptr, "CPU");
-    p->infer_request = p->compiled_model.create_infer_request();
+    // 初始化core对象
+    ov::Core core; // core对象
+    std::shared_ptr<ov::Model> model_ptr = core.read_model(model_path);
+    ov::CompiledModel compiled_model = core.compile_model(model_ptr, "CPU");
+    ov::InferRequest infer_request = compiled_model.create_infer_request();
 
     // 对输入图片进行预处理
     // 获取输入节点tensor
-    ov::Tensor input_image_tensor = p->infer_request.get_tensor(input_node_name);
+    ov::Tensor input_image_tensor = infer_request.get_tensor(input_node_name);
     int input_H = input_image_tensor.get_shape()[2]; //获得"image"节点的Height
     int input_W = input_image_tensor.get_shape()[3]; //获得"image"节点的Width
     cv::Mat image = cv::imread(image_path);; // 读取输入图片
@@ -96,10 +80,10 @@ int main() {
     fill_tensor_data_image(input_image_tensor, normal_image);
 
     // 模型推理
-    p->infer_request.infer();
+    infer_request.infer();
 
     // 获取输出节点tensor
-    const ov::Tensor& output_tensor = p->infer_request.get_tensor(output_node_name);
+    const ov::Tensor& output_tensor = infer_request.get_tensor(output_node_name);
     // 读取输出数据
     float* result_array = output_tensor.data<float>();
     // 处理输出结果

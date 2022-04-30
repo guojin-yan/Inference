@@ -1,0 +1,11 @@
+LIBRARY 
+		"tensorrtsharp"
+EXPORTS
+		onnx_to_engine
+		nvinfer_init
+		creat_gpu_buffer
+		load_image_data
+		infer
+		read_infer_result
+		nvinfer_delete
+

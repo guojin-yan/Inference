@@ -23,7 +23,7 @@ namespace inference_platform
         int deployment_platform = 1;
 
         // 模型文件地址
-        string model_path = @"E:\Text_Model\flowerclas\flower_clas.onnx";
+        string model_path = @"E:\Paddle\PaddleClas2\inference\inference.pdmodel";
         // 图片文件地址
         string image_path = @"E:\Text_dataset\flowers102\jpg\image_00001.jpg";
         // lable文件地址

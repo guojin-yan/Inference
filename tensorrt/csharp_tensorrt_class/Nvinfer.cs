@@ -15,9 +15,9 @@ namespace TensorRtSharp
         /// <param name="onnx_file_path">onnx模型本地地址</param>
         /// <param name="engine_file_path">engine模型本地保存地址</param>
         /// <param name="type">模型精度类型</param>
-        public void onnx_to_engine(string onnx_file_path, string engine_file_path, int type)
+        public void onnx_to_engine(string onnx_file_path, string engine_file_path, AccuracyFlag type)
         {
-            NativeMethods.onnx_to_engine(onnx_file_path, engine_file_path, type);
+            NativeMethods.onnx_to_engine(onnx_file_path, engine_file_path, (int)type);
         }
         /// <summary>
         /// 读取本地engine模型
@@ -44,9 +44,9 @@ namespace TensorRtSharp
         /// <param name="image_data">图片矩阵数据</param>
         /// <param name="image_size">图片数据长度</param>
         /// <param name="BN_means">归一化处理数据方式</param>
-        public void load_image_data(string node_name, byte[] image_data, ulong image_size,int BN_means)
+        public void load_image_data(string node_name, byte[] image_data, ulong image_size, BNFlag BN_means)
         {
-            ptr = NativeMethods.load_image_data(ptr, node_name, ref image_data[0], image_size, BN_means);
+            ptr = NativeMethods.load_image_data(ptr, node_name, ref image_data[0], image_size, (int)BN_means);
         }
         /// <summary>
         /// 模型推理
@@ -61,7 +61,7 @@ namespace TensorRtSharp
         /// <param name="node_name_wchar">模型节点名</param>
         /// <param name="data_length">输出数据长度</param>
         /// <returns>输出数据数组</returns>
-        public float[] read_infer_result(string node_name_wchar,ulong data_length)
+        public float[] read_infer_result(string node_name_wchar, ulong data_length)
         {
             float[] result = new float[data_length];
             NativeMethods.read_infer_result(ptr, node_name_wchar, ref result[0], data_length);
@@ -75,5 +75,16 @@ namespace TensorRtSharp
             NativeMethods.nvinfer_delete(ptr);
         }
 
+    }
+
+    public enum AccuracyFlag : int
+    {
+        kFP16 = 1, 
+        kINT8 = 2,
+    }
+    public enum BNFlag : int
+    { 
+        Paddle = 0,
+        Normal = 1,
     }
 }

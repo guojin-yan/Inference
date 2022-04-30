@@ -24,23 +24,6 @@ class Logger : public nvinfer1::ILogger
 	}
 } gLogger;
 
-// @brief 
-typedef struct tensorRT_nvinfer {
-	Logger logger;
-	// 反序列化引擎
-	nvinfer1::IRuntime* runtime;
-	// 推理引擎
-	// 保存模型的模型结构、模型参数以及最优计算kernel配置；
-	// 不能跨平台和跨TensorRT版本移植
-	nvinfer1::ICudaEngine* engine;
-	// 上下文
-	// 储存中间值，实际进行推理的对象
-	// 由engine创建，可创建多个对象，进行多推理任务
-	nvinfer1::IExecutionContext* context;
-	cudaStream_t stream;
-	void** blob_data_buffer;
-} NvinferStruct;
-
 
 void onnx_to_engine(std::string onnx_file_path, std::string engine_file_path, int type) {
 
@@ -103,7 +86,6 @@ int main() {
 	std::string lable_path = "E:/Git_space/Al模型部署开发方式/model/yolov5/lable.txt";
 	const char* input_node_name = "images";
 	const char* output_node_name = "output";
-
 	int num_ionode = 2;
 
 	// 读取本地模型文件
@@ -119,25 +101,35 @@ int main() {
 	char* model_stream = new char[size];
 	file_ptr.read(model_stream, size);
 	file_ptr.close();
-	// 创建推理核心结构体，初始化变量
-	NvinferStruct* p = new NvinferStruct();
-	p->runtime = nvinfer1::createInferRuntime(gLogger);
-	p->engine = p->runtime->deserializeCudaEngine(model_stream, size);
-	p->context = p->engine->createExecutionContext();
-	p->blob_data_buffer = new void* [num_ionode];
+	
+	// 日志记录接口
+	Logger logger;
+	// 反序列化引擎
+	nvinfer1::IRuntime* runtime = nvinfer1::createInferRuntime(logger);
+	// 推理引擎
+	// 保存模型的模型结构、模型参数以及最优计算kernel配置；
+	// 不能跨平台和跨TensorRT版本移植
+	nvinfer1::ICudaEngine* engine = runtime->deserializeCudaEngine(model_stream, size);
+	// 上下文
+	// 储存中间值，实际进行推理的对象
+	// 由engine创建，可创建多个对象，进行多推理任务
+	nvinfer1::IExecutionContext* context = engine->createExecutionContext();
+	
+	
 	delete[] model_stream;
 
 	// 创建GPU显存缓冲区
+	void** data_buffer = new void* [num_ionode];
 	// 创建GPU显存输入缓冲区
-	int input_node_index = p->engine->getBindingIndex(input_node_name);
-	nvinfer1::Dims input_node_dim = p->engine->getBindingDimensions(input_node_index);
+	int input_node_index = engine->getBindingIndex(input_node_name);
+	nvinfer1::Dims input_node_dim = engine->getBindingDimensions(input_node_index);
 	size_t input_data_length = input_node_dim.d[1]* input_node_dim.d[2] * input_node_dim.d[3];
-	cudaMalloc(&(p->blob_data_buffer[input_node_index]), input_data_length * sizeof(float));
+	cudaMalloc(&(data_buffer[input_node_index]), input_data_length * sizeof(float));
 	// 创建GPU显存输出缓冲区
-	int output_node_index = p->engine->getBindingIndex(output_node_name);
-	nvinfer1::Dims output_node_dim = p->engine->getBindingDimensions(output_node_index);
+	int output_node_index = engine->getBindingIndex(output_node_name);
+	nvinfer1::Dims output_node_dim = engine->getBindingDimensions(output_node_index);
 	size_t output_data_length = output_node_dim.d[1] * output_node_dim.d[2] ;
-	cudaMalloc(&(p->blob_data_buffer[output_node_index]), output_data_length * sizeof(float));
+	cudaMalloc(&(data_buffer[output_node_index]), output_data_length * sizeof(float));
 
 
 	// 图象预处理 - 格式化操作
@@ -151,18 +143,19 @@ int main() {
 	cv::Mat BN_image = cv::dnn::blobFromImage(max_image, 1 / 255.0, input_node_shape, cv::Scalar(0, 0, 0), true, false);
 
 	// 创建输入cuda流
-	cudaStreamCreate(&p->stream);
+	cudaStream_t stream;
+	cudaStreamCreate(&stream);
 	std::vector<float> input_data(input_data_length);
 	memcpy(input_data.data(), BN_image.ptr<float>(), input_data_length * sizeof(float));
 
 	// 输入数据由内存到GPU显存
-	cudaMemcpyAsync(p->blob_data_buffer[input_node_index], input_data.data(), input_data_length * sizeof(float), cudaMemcpyHostToDevice, p->stream);
+	cudaMemcpyAsync(data_buffer[input_node_index], input_data.data(), input_data_length * sizeof(float), cudaMemcpyHostToDevice, stream);
 
 	// 模型推理
-	p->context->enqueueV2(p->blob_data_buffer, p->stream, nullptr);
+	context->enqueueV2(data_buffer, stream, nullptr);
 
 	float* result_array = new float[output_data_length];
-	cudaMemcpyAsync(result_array, p->blob_data_buffer[output_node_index], output_data_length * sizeof(float), cudaMemcpyDeviceToHost, p->stream);
+	cudaMemcpyAsync(result_array, data_buffer[output_node_index], output_data_length * sizeof(float), cudaMemcpyDeviceToHost, stream);
 
 	ResultYolov5 result;
 	result.factor = max_side_length / (float) input_node_dim.d[2];

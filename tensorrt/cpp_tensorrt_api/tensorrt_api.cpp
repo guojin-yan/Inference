@@ -12,10 +12,8 @@
 // @brief 用于创建IBuilder、IRuntime或IRefitter实例的记录器用于通过该接口创建的所有对象。
 // 在释放所有创建的对象之前，记录器应一直有效。
 // 主要是实例化ILogger类下的log()方法。
-class Logger : public nvinfer1::ILogger
-{
-	void log(Severity severity, const char* message)  noexcept
-	{
+class Logger : public nvinfer1::ILogger{
+	void log(Severity severity, const char* message)  noexcept{
 		// suppress info-level messages
 		if (severity != Severity::kINFO)
 			std::cout << message << std::endl;
@@ -98,10 +96,11 @@ extern "C"  __declspec(dllexport) void __stdcall onnx_to_engine(const wchar_t* o
 	// 构建器，获取cuda内核目录以获取最快的实现
 	// 用于创建config、network、engine的其他对象的核心类
 	nvinfer1::IBuilder* builder = nvinfer1::createInferBuilder(gLogger);
-	const auto explicitBatch = 1U << static_cast<uint32_t>(nvinfer1::NetworkDefinitionCreationFlag::kEXPLICIT_BATCH);
+	// 定义网络属性
+	const auto explicit_batch = 1U << static_cast<uint32_t>(nvinfer1::NetworkDefinitionCreationFlag::kEXPLICIT_BATCH);
 	// 解析onnx网络文件
 	// tensorRT模型类
-	nvinfer1::INetworkDefinition* network = builder->createNetworkV2(explicitBatch);
+	nvinfer1::INetworkDefinition* network = builder->createNetworkV2(explicit_batch);
 	// onnx文件解析类
 	// 将onnx文件解析，并填充rensorRT网络结构
 	nvonnxparser::IParser* parser = nvonnxparser::createParser(*network, gLogger);
@@ -210,7 +209,7 @@ extern "C"  __declspec(dllexport) void* __stdcall load_image_data(void* nvinfer_
 	// 重构NvinferStruct
 	NvinferStruct* p = (NvinferStruct*)nvinfer_ptr;
 
-	// 湖区输入节点信息
+	// 获取输入节点信息
 	const char* node_name = wchar_to_char(node_name_wchar);
 	int node_index = p->engine->getBindingIndex(node_name);
 	// 获取输入节点未读信息
@@ -289,7 +288,6 @@ extern "C"  __declspec(dllexport) void __stdcall read_infer_result(void* nvinfer
 	std::vector<float> output_data(node_data_length * 3);
 	// 将输出数据由GPU显存到内存
 	cudaMemcpyAsync(output_data.data(), p->data_buffer[node_index], node_data_length * sizeof(float), cudaMemcpyDeviceToHost, p->stream);
-	
 	
 	for (int i = 0; i < node_data_length; i++) {
 		*output_result = output_data[i];
