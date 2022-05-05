@@ -300,5 +300,9 @@ extern "C"  __declspec(dllexport) void __stdcall read_infer_result(void* nvinfer
 // @param nvinfer_ptr NvinferStruct结构体指针
 extern "C"  __declspec(dllexport) void __stdcall nvinfer_delete(void* nvinfer_ptr) {
 	NvinferStruct* p = (NvinferStruct*)nvinfer_ptr;
+	delete[] p->data_buffer;
+	delete p->context;
+	delete p->engine;
+	delete p->runtime;
 	delete p;
 }

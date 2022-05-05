@@ -73,6 +73,7 @@ namespace TensorRtSharp
         public void delete()
         {
             NativeMethods.nvinfer_delete(ptr);
+           
         }
 
     }
