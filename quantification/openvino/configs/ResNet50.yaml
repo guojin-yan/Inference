@@ -1,0 +1,36 @@
+
+
+models:
+  - name: ResNet50
+
+    launchers:
+      - framework: dlsdk
+        device: CPU
+        adapter: classification
+
+    datasets:
+      - name: classification_dataset
+        data_source: E:/Text_dataset/flowers102/jpg
+        annotation_conversion:
+          converter: imagenet
+          annotation_file: E:/Text_dataset/flowers102/train_list.txt
+        reader: pillow_imread
+
+        preprocessing:
+          - type: resize
+            size: 256
+            aspect_ratio_scale: greater
+            use_pillow: True
+          - type: crop
+            size: 224
+            use_pillow: True
+          - type: bgr_to_rgb
+
+        metrics:
+          - name: accuracy@top1
+            type: accuracy
+            top_k: 1
+
+          - name: accuracy@top5
+            type: accuracy
+            top_k: 5
