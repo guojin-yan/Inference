@@ -59,10 +59,25 @@
             this.cb_result_chioce = new System.Windows.Forms.ComboBox();
             this.btn_save_result = new System.Windows.Forms.Button();
             this.btn_save_results = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.pb_speed = new System.Windows.Forms.ProgressBar();
+            this.model_inference_time = new System.Windows.Forms.Button();
+            this.la_progress = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btn_save_result_time = new System.Windows.Forms.Button();
+            this.btn_save_results_time = new System.Windows.Forms.Button();
+            this.tb_text_num = new System.Windows.Forms.TextBox();
+            this.cb_result_chioce_time = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -367,17 +382,17 @@
             // 
             // tb_message
             // 
-            this.tb_message.Location = new System.Drawing.Point(37, 718);
+            this.tb_message.Location = new System.Drawing.Point(808, 900);
             this.tb_message.Multiline = true;
             this.tb_message.Name = "tb_message";
             this.tb_message.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_message.Size = new System.Drawing.Size(744, 140);
+            this.tb_message.Size = new System.Drawing.Size(958, 214);
             this.tb_message.TabIndex = 2;
             // 
             // model_inference
             // 
             this.model_inference.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.model_inference.Location = new System.Drawing.Point(37, 625);
+            this.model_inference.Location = new System.Drawing.Point(25, 56);
             this.model_inference.Name = "model_inference";
             this.model_inference.Size = new System.Drawing.Size(148, 40);
             this.model_inference.TabIndex = 4;
@@ -404,8 +419,12 @@
             "测试2",
             "测试3",
             "测试4",
-            "测试5"});
-            this.cb_result_chioce.Location = new System.Drawing.Point(37, 685);
+            "测试5",
+            "测试6",
+            "测试7",
+            "测试8",
+            "测试9"});
+            this.cb_result_chioce.Location = new System.Drawing.Point(934, 819);
             this.cb_result_chioce.Name = "cb_result_chioce";
             this.cb_result_chioce.Size = new System.Drawing.Size(182, 32);
             this.cb_result_chioce.TabIndex = 5;
@@ -414,7 +433,7 @@
             // btn_save_result
             // 
             this.btn_save_result.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_save_result.Location = new System.Drawing.Point(251, 625);
+            this.btn_save_result.Location = new System.Drawing.Point(266, 56);
             this.btn_save_result.Name = "btn_save_result";
             this.btn_save_result.Size = new System.Drawing.Size(148, 40);
             this.btn_save_result.TabIndex = 4;
@@ -425,7 +444,7 @@
             // btn_save_results
             // 
             this.btn_save_results.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_save_results.Location = new System.Drawing.Point(463, 625);
+            this.btn_save_results.Location = new System.Drawing.Point(530, 56);
             this.btn_save_results.Name = "btn_save_results";
             this.btn_save_results.Size = new System.Drawing.Size(148, 40);
             this.btn_save_results.TabIndex = 4;
@@ -433,18 +452,169 @@
             this.btn_save_results.UseVisualStyleBackColor = true;
             this.btn_save_results.Click += new System.EventHandler(this.btn_save_results_Click);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.model_inference);
+            this.groupBox5.Controls.Add(this.btn_save_result);
+            this.groupBox5.Controls.Add(this.btn_save_results);
+            this.groupBox5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox5.Location = new System.Drawing.Point(37, 755);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(735, 136);
+            this.groupBox5.TabIndex = 0;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "模型测试";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.pb_speed);
+            this.groupBox6.Controls.Add(this.model_inference_time);
+            this.groupBox6.Controls.Add(this.la_progress);
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.btn_save_result_time);
+            this.groupBox6.Controls.Add(this.btn_save_results_time);
+            this.groupBox6.Controls.Add(this.tb_text_num);
+            this.groupBox6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox6.Location = new System.Drawing.Point(37, 923);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(735, 191);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "时间测试";
+            // 
+            // pb_speed
+            // 
+            this.pb_speed.Location = new System.Drawing.Point(471, 64);
+            this.pb_speed.Name = "pb_speed";
+            this.pb_speed.Size = new System.Drawing.Size(150, 27);
+            this.pb_speed.TabIndex = 8;
+            // 
+            // model_inference_time
+            // 
+            this.model_inference_time.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.model_inference_time.Location = new System.Drawing.Point(25, 134);
+            this.model_inference_time.Name = "model_inference_time";
+            this.model_inference_time.Size = new System.Drawing.Size(148, 40);
+            this.model_inference_time.TabIndex = 4;
+            this.model_inference_time.Text = "模型推理";
+            this.model_inference_time.UseVisualStyleBackColor = true;
+            this.model_inference_time.Click += new System.EventHandler(this.model_inference_time_Click);
+            // 
+            // la_progress
+            // 
+            this.la_progress.AutoSize = true;
+            this.la_progress.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.la_progress.Location = new System.Drawing.Point(646, 67);
+            this.la_progress.Name = "la_progress";
+            this.la_progress.Size = new System.Drawing.Size(32, 21);
+            this.la_progress.TabIndex = 3;
+            this.la_progress.Text = "0%";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(350, 67);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(115, 21);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "推理进度：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(41, 67);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(115, 21);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "测试次数：";
+            // 
+            // btn_save_result_time
+            // 
+            this.btn_save_result_time.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_save_result_time.Location = new System.Drawing.Point(266, 134);
+            this.btn_save_result_time.Name = "btn_save_result_time";
+            this.btn_save_result_time.Size = new System.Drawing.Size(148, 40);
+            this.btn_save_result_time.TabIndex = 4;
+            this.btn_save_result_time.Text = "保存结果";
+            this.btn_save_result_time.UseVisualStyleBackColor = true;
+            this.btn_save_result_time.Click += new System.EventHandler(this.btn_save_result_time_Click);
+            // 
+            // btn_save_results_time
+            // 
+            this.btn_save_results_time.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_save_results_time.Location = new System.Drawing.Point(518, 134);
+            this.btn_save_results_time.Name = "btn_save_results_time";
+            this.btn_save_results_time.Size = new System.Drawing.Size(148, 40);
+            this.btn_save_results_time.TabIndex = 4;
+            this.btn_save_results_time.Text = "保存本地";
+            this.btn_save_results_time.UseVisualStyleBackColor = true;
+            this.btn_save_results_time.Click += new System.EventHandler(this.btn_save_results_time_Click);
+            // 
+            // tb_text_num
+            // 
+            this.tb_text_num.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tb_text_num.Location = new System.Drawing.Point(162, 64);
+            this.tb_text_num.Name = "tb_text_num";
+            this.tb_text_num.Size = new System.Drawing.Size(152, 31);
+            this.tb_text_num.TabIndex = 2;
+            // 
+            // cb_result_chioce_time
+            // 
+            this.cb_result_chioce_time.FormattingEnabled = true;
+            this.cb_result_chioce_time.Items.AddRange(new object[] {
+            "当前检测",
+            "测试1",
+            "测试2",
+            "测试3",
+            "测试4",
+            "测试5",
+            "测试6",
+            "测试7",
+            "测试8",
+            "测试9"});
+            this.cb_result_chioce_time.Location = new System.Drawing.Point(934, 862);
+            this.cb_result_chioce_time.Name = "cb_result_chioce_time";
+            this.cb_result_chioce_time.Size = new System.Drawing.Size(182, 32);
+            this.cb_result_chioce_time.TabIndex = 6;
+            this.cb_result_chioce_time.SelectedIndexChanged += new System.EventHandler(this.cb_result_chioce_time_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(808, 818);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(117, 28);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "模型测试：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(808, 862);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(117, 28);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "时间测试：";
+            // 
             // InferencePlatform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1778, 876);
+            this.ClientSize = new System.Drawing.Size(1778, 1144);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cb_result_chioce_time);
             this.Controls.Add(this.cb_result_chioce);
             this.Controls.Add(this.tb_message);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.btn_save_results);
-            this.Controls.Add(this.btn_save_result);
-            this.Controls.Add(this.model_inference);
             this.Controls.Add(this.panel_image_show);
+            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox4);
@@ -459,6 +629,9 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -497,5 +670,18 @@
         private System.Windows.Forms.ComboBox cb_result_chioce;
         private System.Windows.Forms.Button btn_save_result;
         private System.Windows.Forms.Button btn_save_results;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button model_inference_time;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btn_save_result_time;
+        private System.Windows.Forms.Button btn_save_results_time;
+        private System.Windows.Forms.TextBox tb_text_num;
+        private System.Windows.Forms.ComboBox cb_result_chioce_time;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ProgressBar pb_speed;
+        private System.Windows.Forms.Label la_progress;
+        private System.Windows.Forms.Label label8;
     }
 }

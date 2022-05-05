@@ -27,8 +27,9 @@ namespace inference_platform
 
             // 配置图片数据
             Mat image = new Mat(image_path);
+            int max = (image.Cols > image.Rows ? image.Cols : image.Rows);
             // 将图片放在矩形背景下
-            Mat max_image = Mat.Zeros(new Size(1024, 1024), MatType.CV_8UC3);
+            Mat max_image = Mat.Zeros(new Size(max, max), MatType.CV_8UC3);
             Rect roi = new Rect(0, 0, image.Cols, image.Rows);
             image.CopyTo(new Mat(max_image, roi));
             // 数据归一化处理
@@ -52,7 +53,7 @@ namespace inference_platform
             // 读取本地模型类别信息
             result.read_class_names(lable_path);
             // 图片加载缩放比例
-            result.factor = (float)(image.Cols > image.Rows ? image.Cols : image.Rows) / (float)640;
+            result.factor = (float)max / (float)640;
             // 处理输出数据
             result_image = result.process_resule(image, result_array);
             DateTime end3_time = DateTime.Now;

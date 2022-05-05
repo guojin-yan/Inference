@@ -71,6 +71,7 @@ namespace inference_platform
             runtime[1] = end1_time - start1_time;
             runtime[2] = end2_time - start2_time;
             runtime[3] = end3_time - start3_time;
+
         }
 
 

@@ -27,7 +27,8 @@ namespace inference_platform
             // 配置图片数据
             Mat image = new Mat(image_path);
             // 将图片放在矩形背景下
-            Mat max_image = Mat.Zeros(new Size(1024, 1024), MatType.CV_8UC3);
+            int max = (image.Cols > image.Rows ? image.Cols : image.Rows);
+            Mat max_image = Mat.Zeros(new Size(max, max), MatType.CV_8UC3);
             Rect roi = new Rect(0, 0, image.Cols, image.Rows);
             image.CopyTo(new Mat(max_image, roi));
             byte[] image_data = new byte[2048 * 2048 * 3];
@@ -35,7 +36,7 @@ namespace inference_platform
             image_data = max_image.ImEncode(".bmp");
             image_size = Convert.ToUInt64(image_data.Length);
             // 将图片数据加载到模型
-            core.load_input_data(input_node_name, image_data, image_size, 0);
+            core.load_input_data(input_node_name, image_data, image_size, 1);
             // 模型推理
             core.infer();
 
@@ -50,7 +51,7 @@ namespace inference_platform
             // 读取本地模型类别信息
             result.read_class_names(lable_path);
             // 图片加载缩放比例
-            result.factor = (float)(image.Cols > image.Rows ? image.Cols : image.Rows) / (float)640;
+            result.factor = (float) max / (float)640;
             // 处理输出数据
             result_image = result.process_resule(image, result_array);
 
