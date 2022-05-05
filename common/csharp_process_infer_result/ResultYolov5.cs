@@ -107,7 +107,7 @@ namespace CommomClass
 
             //Cv2.ImShow("C# + TensorRT + Yolov5 推理结果", result_image);
             //Cv2.WaitKey();
-
+            result_data.Dispose();
             return result_image;
 
         }
