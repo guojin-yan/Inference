@@ -239,6 +239,7 @@ extern "C"  __declspec(dllexport) void* __stdcall load_image_data(void* nvinfer_
 			rgb_channels[i].convertTo(rgb_channels[i], CV_32FC1, 1.0 / std_values[i], (0.0 - mean_values[i]) / std_values[i]);
 		}
 		cv::merge(rgb_channels, BN_image);
+		std::vector<cv::Mat>().swap(rgb_channels);
 	}
 	else if (BN_means == 1) {
 		// 将图像归一化，并放缩到指定大小
@@ -255,7 +256,10 @@ extern "C"  __declspec(dllexport) void* __stdcall load_image_data(void* nvinfer_
 
 	// 将输入数据由内存到GPU显存
 	cudaMemcpyAsync(p->data_buffer[node_index], input_data.data(), node_data_length * 3 * sizeof(float), cudaMemcpyHostToDevice, p->stream);
-
+	
+	std::vector<float>().swap(input_data);
+	input_image.release();
+	BN_image.release();
 	return (void*)p;
 }
 
@@ -293,16 +297,17 @@ extern "C"  __declspec(dllexport) void __stdcall read_infer_result(void* nvinfer
 		*output_result = output_data[i];
 		output_result++;
 	}
-
+	std::vector<float>().swap(output_data);
 }
 
 // @brief 删除内存地址
 // @param nvinfer_ptr NvinferStruct结构体指针
 extern "C"  __declspec(dllexport) void __stdcall nvinfer_delete(void* nvinfer_ptr) {
 	NvinferStruct* p = (NvinferStruct*)nvinfer_ptr;
-	delete[] p->data_buffer;
-	delete p->context;
-	delete p->engine;
-	delete p->runtime;
+
+	delete p->data_buffer;
+	p->context->destroy();
+	p->engine->destroy();
+	p->runtime->destroy();
 	delete p;
 }
