@@ -23,7 +23,8 @@ namespace charp_openvino_yolov5
             // 配置图片数据
             Mat image = new Mat(image_path);
             // 将图片放在矩形背景下
-            Mat max_image = Mat.Zeros(new Size(1024, 1024), MatType.CV_8UC3);
+            int max_image_length = image.Cols > image.Rows ? image.Cols : image.Rows;
+            Mat max_image = Mat.Zeros(new Size(max_image_length, max_image_length), MatType.CV_8UC3);
             Rect roi = new Rect(0, 0, image.Cols, image.Rows);
             image.CopyTo(new Mat(max_image, roi));
             byte[] image_data = new byte[2048 * 2048 * 3];

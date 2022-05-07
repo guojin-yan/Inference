@@ -101,7 +101,8 @@ namespace CommomClass
                 Cv2.Rectangle(result_image, position_boxes[index], new Scalar(0, 0, 255), 2, LineTypes.Link8);
                 Cv2.Rectangle(result_image, new Point(position_boxes[index].TopLeft.X, position_boxes[index].TopLeft.Y - 20),
                     new Point(position_boxes[index].BottomRight.X, position_boxes[index].TopLeft.Y), new Scalar(0, 255, 255), -1);
-                Cv2.PutText(result_image, class_names[idx], new Point(position_boxes[index].X, position_boxes[index].Y - 10),
+                Cv2.PutText(result_image, class_names[idx] + "-" + confidences[index].ToString("0.00"),
+                    new Point(position_boxes[index].X, position_boxes[index].Y - 10),
                     HersheyFonts.HersheySimplex, 0.6, new Scalar(0, 0, 0), 1);
             }
 
