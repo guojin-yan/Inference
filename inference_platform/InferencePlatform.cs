@@ -23,20 +23,20 @@ namespace inference_platform
         // 部署平台
         int deployment_platform = 1;
 
-        // 模型文件地址
-        string model_path = @"E:\Text_Model\flowerclas\flower_clas.onnx";
-        // 图片文件地址
-        string image_path = @"E:\Text_dataset\flowers102\jpg\image_00327.jpg";
-        // lable文件地址
-        string lable_path = @"E:\Git_space\Al模型部署开发方式\model\resNet50\flowers102_label.txt";
-
-
         //// 模型文件地址
-        //string model_path = @"E:\Text_Model\yolov5\yolov5s.onnx";
+        //string model_path = @"E:\Text_Model\flowerclas\flower_clas.onnx";
         //// 图片文件地址
-        //string image_path = @"E:\Git_space\Al模型部署开发方式\model\yolov5\text_image\0002.jpg";
+        //string image_path = @"E:\Text_dataset\flowers102\jpg\image_00327.jpg";
         //// lable文件地址
-        //string lable_path = @"E:\Git_space\Al模型部署开发方式\model\yolov5\lable.txt";
+        //string lable_path = @"E:\Git_space\Al模型部署开发方式\model\resNet50\flowers102_label.txt";
+
+
+        // 模型文件地址
+        string model_path = @"E:\Text_Model\yolov5\yolov5s.engine";
+        // 图片文件地址
+        string image_path = @"E:\Git_space\Al模型部署开发方式\model\yolov5\text_image\0002.jpg";
+        // lable文件地址
+        string lable_path = @"E:\Git_space\Al模型部署开发方式\model\yolov5\lable.txt";
 
         // 模型测试结果存储
         string text_result = "";
