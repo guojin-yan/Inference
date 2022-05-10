@@ -51,8 +51,6 @@ namespace charp_tensorrt_yolov5
             result.read_class_names(lable_path);
             // 处理结果数据
             Mat result_image = result.process_resule(image, result_array);
-            Console.WriteLine(i);
-
 
             Cv2.ImShow("C# + TensorRT + Yolov5 推理结果", result_image);
             Cv2.WaitKey();
