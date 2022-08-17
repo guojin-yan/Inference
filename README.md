@@ -4,9 +4,9 @@
 
 ​	当前项目，主要基于当前比较常见的OpenVINO™、TensorRT、ONNX runtime以及OpenCV Dnn四个部署平台进行对比展开，主要针对这四个平台如何部署深度学习项目进行了测试，并针对OpenVINOTM、TensorRT提出了在C#编程平台的解决办法，建立了C#模型部署检测软件平台。
 
-![image-20220803180405845](E:\Git_space\Al模型部署开发方式\doc\image\image-20220803180405845.png)
+![image-20220803180405845](doc/image/image-20220803180405845.png)
 
-![image-20220803180347472](E:\Git_space\Al模型部署开发方式\doc\image\image-20220803180347472.png)
+![image-20220803180347472](doc/image/image-20220803180347472.png)
 
 ## 项目文档
 
